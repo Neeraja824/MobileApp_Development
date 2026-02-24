@@ -133,116 +133,156 @@
 //   }
 // })
 
-import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
-import {
-  TextInput,
-  Button,
-  Switch,
-  Checkbox,
-  RadioButton,
-  Text,
-  HelperText
-} from "react-native-paper";
+// import React, { useState } from "react";
+// import { View, StyleSheet } from "react-native";
+// import {
+//   TextInput,
+//   Button,
+//   Switch,
+//   Checkbox,
+//   RadioButton,
+//   Text,
+//   HelperText
+// } from "react-native-paper";
 
-const App = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [mobile, setMobile] = useState("");
-  const [isSwitchOn, setIsSwitchOn] = useState(true);
-  const [checked, setChecked] = useState(false);
-  const [radio, setRadio] = useState("no");
-  const inputsDisabled = !isSwitchOn || checked || radio === "yes";
-  const isEmailValid = () =>
-    /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(email);
+// const App = () => {
+//   const [name, setName] = useState("");
+//   const [email, setEmail] = useState("");
+//   const [password, setPassword] = useState("");
+//   const [mobile, setMobile] = useState("");
+//   const [isSwitchOn, setIsSwitchOn] = useState(true);
+//   const [checked, setChecked] = useState(false);
+//   const [radio, setRadio] = useState("no");
+//   const inputsDisabled = !isSwitchOn || checked || radio === "yes";
+//   const isEmailValid = () =>
+//     /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(email);
 
-  const isMobileValid = () =>
-    /^[0-9]{10}$/.test(mobile);
+//   const isMobileValid = () =>
+//     /^[0-9]{10}$/.test(mobile);
+//   return (
+//     <View style={styles.container}>
+//       <View style={styles.row}>
+//         <Text>Enable Form</Text>
+//         <Switch
+//           value={isSwitchOn}
+//           onValueChange={() => setIsSwitchOn(!isSwitchOn)}
+//         />
+//       </View>
+//       <View style={styles.row}>
+//         <Checkbox
+//           status={checked ? "checked" : "unchecked"}
+//           onPress={() => setChecked(!checked)}
+//         />
+//         <Text>Disable Inputs (Checkbox)</Text>
+//       </View>
+//       <RadioButton.Group
+//         onValueChange={(value) => setRadio(value)}
+//         value={radio}
+//       >
+//         <View style={styles.row}>
+//           <RadioButton value="no" />
+//           <Text>Enable Inputs</Text>
+//           <RadioButton value="yes" />
+//           <Text>Disable Inputs</Text>
+//         </View>
+//       </RadioButton.Group>
+//       <TextInput
+//         label="Name"
+//         value={name}
+//         onChangeText={setName}
+//         disabled={inputsDisabled}
+//         style={styles.input}
+//       />
+//       <TextInput
+//         label="Email"
+//         value={email}
+//         onChangeText={setEmail}
+//         disabled={inputsDisabled}
+//         style={styles.input}
+//       />
+//       <HelperText type="error" visible={email !== "" && !isEmailValid()}>
+//         Enter valid email
+//       </HelperText>
+//       <TextInput
+//         label="Password"
+//         secureTextEntry
+//         value={password}
+//         onChangeText={setPassword}
+//         disabled={inputsDisabled}
+//         style={styles.input}
+//       />
+//       <TextInput
+//         label="Mobile Number"
+//         keyboardType="numeric"
+//         value={mobile}
+//         onChangeText={setMobile}
+//         disabled={inputsDisabled}
+//         style={styles.input}
+//       />
+//       <HelperText type="error" visible={mobile !== "" && !isMobileValid()}>
+//         Mobile must be 10 digits
+//       </HelperText>
+//       <Button mode="contained" disabled={inputsDisabled}>
+//         Submit
+//       </Button>
+//     </View>
+//   );
+// };
+
+// export default App;
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     padding: 20,
+//     marginTop: 40
+//   },
+//   input: {
+//     marginBottom: 10
+//   },
+//   row: {
+//     flexDirection: "row",
+//     alignItems: "center",
+//     marginBottom: 10
+//   }
+// });
+
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View } from 'react-native';
+import { Icon } from 'react-native-paper';
+import Home from './Home';
+import Contact from './Contact';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+// import {Icon} from 'react-native-paper';
+import { createStackNavigator } from '@react-navigation/stack';
+const Stack = createNativeStackNavigator()
+export default function App() {
   return (
-    <View style={styles.container}>
-      <View style={styles.row}>
-        <Text>Enable Form</Text>
-        <Switch
-          value={isSwitchOn}
-          onValueChange={() => setIsSwitchOn(!isSwitchOn)}
-        />
-      </View>
-      <View style={styles.row}>
-        <Checkbox
-          status={checked ? "checked" : "unchecked"}
-          onPress={() => setChecked(!checked)}
-        />
-        <Text>Disable Inputs (Checkbox)</Text>
-      </View>
-      <RadioButton.Group
-        onValueChange={(value) => setRadio(value)}
-        value={radio}
-      >
-        <View style={styles.row}>
-          <RadioButton value="no" />
-          <Text>Enable Inputs</Text>
-          <RadioButton value="yes" />
-          <Text>Disable Inputs</Text>
-        </View>
-      </RadioButton.Group>
-      <TextInput
-        label="Name"
-        value={name}
-        onChangeText={setName}
-        disabled={inputsDisabled}
-        style={styles.input}
-      />
-      <TextInput
-        label="Email"
-        value={email}
-        onChangeText={setEmail}
-        disabled={inputsDisabled}
-        style={styles.input}
-      />
-      <HelperText type="error" visible={email !== "" && !isEmailValid()}>
-        Enter valid email
-      </HelperText>
-      <TextInput
-        label="Password"
-        secureTextEntry
-        value={password}
-        onChangeText={setPassword}
-        disabled={inputsDisabled}
-        style={styles.input}
-      />
-      <TextInput
-        label="Mobile Number"
-        keyboardType="numeric"
-        value={mobile}
-        onChangeText={setMobile}
-        disabled={inputsDisabled}
-        style={styles.input}
-      />
-      <HelperText type="error" visible={mobile !== "" && !isMobileValid()}>
-        Mobile must be 10 digits
-      </HelperText>
-      <Button mode="contained" disabled={inputsDisabled}>
-        Submit
-      </Button>
-    </View>
+   <NavigationContainer>
+    <Stack.Navigator
+      screenOptions={{
+        // title:"HAI"
+        // headerShown:false
+        // headerStyle:{
+        //   backgroundColor:"red"
+        // }
+        // headerTintColor:"red"
+        // headerTitleStyle:{
+        //   fontSize:26
+        // }
+        headerTitleAlign:"center",
+        headerRight:()=> <Icon source={"bell"} size={24}/>,
+        // headerLeft:() => <Icon source={"home"} size={24}/>,
+        headerBackButtonDisplayMode:"minimal",
+        animation:"fade"
+
+      }}
+    >
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Contact" component={Contact} />
+    </Stack.Navigator>
+   </NavigationContainer>
   );
-};
+}
 
-export default App;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    marginTop: 40
-  },
-  input: {
-    marginBottom: 10
-  },
-  row: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 10
-  }
-});
